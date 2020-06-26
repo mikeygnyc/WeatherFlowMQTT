@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js -m mqtt://mqtt.x.y/",
-    "build":"npm i && tsc && mv node_modules ./app/ && cp package.json ./app/"
+    "build": "rm -rf ./app/ && npm i && tsc && mv ./node_modules ./app/ && cp package.json ./app/"
   },
   "bin": {
     "udp-mqtt-relay": "./server.js"
