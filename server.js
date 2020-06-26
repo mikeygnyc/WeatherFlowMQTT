@@ -87,11 +87,10 @@ function Server(config) {
             stats.incomingMessages += 1;
             var payload = buffer.toString();
             stats.incomingBytes += payload.length;
-            var parts = payload.split(' ');
-            var topic = parts.shift();
-            stats.incomingReadings += parts.length;
-            var data = parts.join(' ');
-            mqttClient.publish(topic, data);
+            stats.incomingReadings += payload.length;
+            let wxobs = JSON.parse(payload);
+            let topic = `wx\${wxobs.type}`;
+            mqttClient.publish(topic, payload);
         } catch (e) {
             stats.badMessages += 1;
         }
