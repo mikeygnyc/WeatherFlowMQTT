@@ -17,7 +17,7 @@ export class CurrentObservation extends EventEmitter {
     }
     public UpdateFromAir(airObs:AirObservation){
         this.stationPressure=airObs.stationPressure;
-        this.airTemperature=airObs.stationPressure;
+        this.airTemperature=airObs.airTemperature;
         this.relativeHumidity=airObs.relativeHumidity;
         this.lightningStrikeCount=airObs.lightningStrikeCount;
         this.lightningStrikeAvgDist=airObs.lightningStrikeAvgDist;
@@ -54,7 +54,7 @@ export class CurrentObservation extends EventEmitter {
         this.battery=tempestObs.battery;
         this.reportInterval=tempestObs.reportInterval;
         this.stationPressure=tempestObs.stationPressure;
-        this.airTemperature=tempestObs.stationPressure;
+        this.airTemperature=tempestObs.airTemperature;
         this.relativeHumidity=tempestObs.relativeHumidity;
         this.lightningStrikeCount=tempestObs.lightningStrikeCount;
         this.lightningStrikeAvgDist=tempestObs.lightningStrikeAvgDist;
