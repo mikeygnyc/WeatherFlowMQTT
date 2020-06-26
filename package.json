@@ -4,7 +4,8 @@
   "description": "Relay UDP packets from a weatherflow hub to an MQTT server",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js -m mqtt://mqtt.x.y/"
+    "start": "node server.js -m mqtt://mqtt.x.y/",
+    "build":"tsc && mv node_modules ./app/ && cp package.json ./app/"
   },
   "bin": {
     "udp-mqtt-relay": "./server.js"
