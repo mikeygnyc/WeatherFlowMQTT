@@ -1,17 +1,17 @@
 {
-  "name": "udp-mqtt-relay",
+  "name": "weatherflow-mqtt-relay",
   "version": "1.0.0",
-  "description": "Relay UDP packets to an MQTT server",
+  "description": "Relay UDP packets from a weatherflow hub to an MQTT server",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js -p 1884 -m mqtt://mqtt.getkiffy.com/"
+    "start": "node server.js -m mqtt://mqtt.x.y/"
   },
   "bin": {
     "udp-mqtt-relay": "./server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lukevenediger/udp-mqtt-relay.git"
+    "url": "git+https://github.com/mikeygnyc/WeatherFlowMQTT"
   },
   "keywords": [
     "mqtt",
@@ -19,16 +19,19 @@
     "relay",
     "iot"
   ],
-  "author": "Luke Venediger",
+  "author": "Mike Gales",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/lukevenediger/udp-mqtt-relay/issues"
+    "url": "https://github.com/mikeygnyc/WeatherFlowMQTT/issues"
   },
-  "homepage": "https://github.com/lukevenediger/udp-mqtt-relay#readme",
   "dependencies": {
     "commander": "^2.9.0",
-    "mqtt": "^1.12.0",
+    "mqtt": "^4.1.0",
     "q": "^1.4.1",
     "winston": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.14",
+    "@types/q": "^1.5.4"
   }
 }

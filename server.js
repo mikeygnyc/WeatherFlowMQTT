@@ -33,19 +33,6 @@ function Server(config) {
             udp.on('message', onIncomingMessage);
         }).then(function() {
             // Start the pulse
-            setInterval(function() {
-                mqttClient.publish("system/udp-mqtt-relay/up", (new Date().getTime() - stats.startTime).toString());
-                mqttClient.publish("system/udp-mqtt-relay/messages", stats.incomingMessages.toString());
-                mqttClient.publish("system/udp-mqtt-relay/bytes", stats.incomingBytes.toString());
-                mqttClient.publish("system/udp-mqtt-relay/badMessages", stats.badMessages.toString());
-                mqttClient.publish("system/udp-mqtt-relay/readings", stats.incomingReadings.toString());
-
-                // Reset the counters
-                stats.incomingBytes = 0;
-                stats.incomingMessages = 0;
-                stats.incomingReadings = 0;
-                stats.badMessages = 0;
-            }, 1000);
             winston.info('Service is ready.');
         }).done();
 
@@ -95,7 +82,7 @@ function Server(config) {
             stats.badMessages += 1;
         }
     }
-
+   
     init();
 }
 
