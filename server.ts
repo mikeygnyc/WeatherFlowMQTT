@@ -117,7 +117,6 @@ class Server {
 
 function run() {
     program
-        .version(pkg.version)
         .option("-m, --mqttServer [string]", "the target mqtt server address.")
         .parse(process.argv);
 
