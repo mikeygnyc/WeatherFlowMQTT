@@ -4,7 +4,8 @@ import * as dgram from "dgram";
 import * as winston from "winston";
 import * as mqtt from "mqtt";
 import * as q from "q";
-import * as program from "commander";
+import { Command } from 'commander'; 
+const program = new Command();
 import { EventType } from "./EventTypes";
 import { CurrentObservation } from "./CurrentObs";
 import { IEvent } from "./IEvent";
@@ -117,6 +118,7 @@ class Server {
 
 function run() {
     program
+        .version(pkg.version)
         .option("-m, --mqttServer [string]", "the target mqtt server address.")
         .parse(process.argv);
 
