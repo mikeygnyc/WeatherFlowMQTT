@@ -4,21 +4,22 @@ import { PrecipitationType } from "./PrecipitationType";
 export class SkyObservation{
     constructor(event:IEvent){
         this.rawEvent=event;
-        if (event.obs){
-            this.timeEpoch=event.obs[0];
-            this.illuminance=event.obs[1];
-            this.uv=event.obs[2];
-            this.rainAccum=event.obs[3];;
-            this.windLull=event.obs[4];
-            this.windAvg=event.obs[5];
-            this.windGust=event.obs[6];
-            this.windDir=event.obs[7];
-            this.battery=event.obs[8];
-            this.reportInterval=event.obs[9];
-            this.solarRadiation=event.obs[10];
-            this.localDayRainAccum=event.obs[11];
-            this.precipType=event.obs[12];
-            this.windSampleInterval=event.obs[13];
+        if (event.obs && event.obs.length>0){
+            let eventObs=event.obs[event.obs.length-1];
+            this.timeEpoch=eventObs[0];
+            this.illuminance=eventObs[1];
+            this.uv=eventObs[2];
+            this.rainAccum=eventObs[3];;
+            this.windLull=eventObs[4];
+            this.windAvg=eventObs[5];
+            this.windGust=eventObs[6];
+            this.windDir=eventObs[7];
+            this.battery=eventObs[8];
+            this.reportInterval=eventObs[9];
+            this.solarRadiation=eventObs[10];
+            this.localDayRainAccum=eventObs[11];
+            this.precipType=eventObs[12];
+            this.windSampleInterval=eventObs[13];
           
         } else {
             this.timeEpoch=Date.now();

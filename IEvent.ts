@@ -6,7 +6,7 @@ export interface IEvent{
     hub_sn?:string;
     evt?:number[];
     ob?:number[];
-    obs?:number[];
+    obs?:Array<number[]>;
     timestamp?: number;
     uptime?: number;
     voltage?:number;

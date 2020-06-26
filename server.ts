@@ -81,12 +81,13 @@ class Server {
         try {
             var payload = buffer.toString();
             let wxobs = JSON.parse(payload) as IEvent;
-
-            switch (wxobs.type as EventType) {
+            let type:EventType=(<any>EventType)[wxobs.type];
+            switch (type) {
                 case EventType.device_status:
                 case EventType.evt_precip:
                 case EventType.evt_strike:
                 case EventType.hub_status:
+                    break;
                 case EventType.obs_air:
                     let airObs:AirObservation = new AirObservation(wxobs);
                     this.currentObs.UpdateFromAir(airObs);

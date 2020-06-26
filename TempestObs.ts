@@ -4,25 +4,26 @@ import { PrecipitationType } from "./PrecipitationType";
 export class TempestObservation{
     constructor(event:IEvent){
         this.rawEvent=event;
-        if (event.obs){
-            this.timeEpoch=event.obs[0];
-            this.windLull=event.obs[1];
-            this.windAvg=event.obs[2];
-            this.windGust=event.obs[3];
-            this.windDir=event.obs[4];
-            this.windSampleInterval=event.obs[5];
-            this.stationPressure=event.obs[6];
-            this.airTemperature=event.obs[7];
-            this.relativeHumidity=event.obs[8];
-            this.illuminance=event.obs[9];
-            this.uv=event.obs[10];
-            this.solarRadiation=event.obs[11];
-            this.rainAccum=event.obs[12];;
-            this.precipType=event.obs[13];
-            this.lightningStrikeCount=event.obs[14];
-            this.lightningStrikeAvgDist=event.obs[15];
-            this.battery=event.obs[16];
-            this.reportInterval=event.obs[17];
+        if (event.obs && event.obs.length>0){
+            let eventObs=event.obs[event.obs.length-1];
+            this.timeEpoch=eventObs[0];
+            this.windLull=eventObs[1];
+            this.windAvg=eventObs[2];
+            this.windGust=eventObs[3];
+            this.windDir=eventObs[4];
+            this.windSampleInterval=eventObs[5];
+            this.stationPressure=eventObs[6];
+            this.airTemperature=eventObs[7];
+            this.relativeHumidity=eventObs[8];
+            this.illuminance=eventObs[9];
+            this.uv=eventObs[10];
+            this.solarRadiation=eventObs[11];
+            this.rainAccum=eventObs[12];;
+            this.precipType=eventObs[13];
+            this.lightningStrikeCount=eventObs[14];
+            this.lightningStrikeAvgDist=eventObs[15];
+            this.battery=eventObs[16];
+            this.reportInterval=eventObs[17];
         } else {
             this.timeEpoch=Date.now();
             this.stationPressure=0;

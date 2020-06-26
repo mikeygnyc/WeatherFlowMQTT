@@ -3,15 +3,16 @@ import { IEvent } from "./IEvent";
 export class AirObservation{
     constructor(event:IEvent){
         this.rawEvent=event;
-        if (event.obs){
-            this.timeEpoch=event.obs[0];
-            this.stationPressure=event.obs[1];
-            this.airTemperature=event.obs[2];
-            this.relativeHumidity=event.obs[3];
-            this.lightningStrikeCount=event.obs[4];
-            this.lightningStrikeAvgDist=event.obs[5];
-            this.battery=event.obs[6];
-            this.reportInterval=event.obs[7];
+        if (event.obs && event.obs.length>0){
+            let eventObs=event.obs[event.obs.length-1];
+            this.timeEpoch=eventObs[0];
+            this.stationPressure=eventObs[1];
+            this.airTemperature=eventObs[2];
+            this.relativeHumidity=eventObs[3];
+            this.lightningStrikeCount=eventObs[4];
+            this.lightningStrikeAvgDist=eventObs[5];
+            this.battery=eventObs[6];
+            this.reportInterval=eventObs[7];
         } else {
             this.timeEpoch=Date.now();
             this.stationPressure=0;
