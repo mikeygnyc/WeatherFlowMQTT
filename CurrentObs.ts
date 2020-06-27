@@ -14,7 +14,7 @@ export class CurrentObservation extends EventEmitter {
     public UpdateFromLightningStrike(strike:LightningStrikeEvent){
         this.lastLightningStrikeDistance=strike.distance;
         this.lastLightningStrikeEnergy=strike.energy;
-        this.LastUpdate=strike.timeEpoch;
+        this.lastLightningStrikeTime=strike.timeEpoch;
     }
     public UpdateFromWind(rapidWind:RapidWindEvent){
         this.windSpeedInstant=rapidWind.windSpeed;
@@ -113,6 +113,7 @@ export class CurrentObservation extends EventEmitter {
             this.emit("update", "LastLightningStrikeTime", value);
         }
     }
+    
     private _lastLightningStrikeDistance!: number;
     public get lastLightningStrikeDistance(): number {
         return this._lastLightningStrikeDistance;
