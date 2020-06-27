@@ -18,7 +18,9 @@ export class CurrentObservation extends EventEmitter {
     }
     public UpdateFromWind(rapidWind:RapidWindEvent){
         this.windSpeedInstant=rapidWind.windSpeed;
-        this.windDirInstant=rapidWind.windDirection;
+        if (rapidWind.windSpeed>0){
+            this.windDirInstant=rapidWind.windDirection;
+        }
         this.LastUpdate=rapidWind.timeEpoch;
     }
     public UpdateFromAir(airObs:AirObservation){
@@ -38,7 +40,9 @@ export class CurrentObservation extends EventEmitter {
         this.windLull=skyObs.windLull;
         this.windAvg=skyObs.windAvg;
         this.windGust=skyObs.windGust;
-        this.windDir=skyObs.windDir;
+        if (skyObs.windAvg>0){
+            this.windDir=skyObs.windDir;
+        }
         this.solarRadiation=skyObs.solarRadiation;
         this.precipType=skyObs.precipType;
         this.windSampleInterval=skyObs.windSampleInterval;
@@ -53,7 +57,10 @@ export class CurrentObservation extends EventEmitter {
         this.windLull=tempestObs.windLull;
         this.windAvg=tempestObs.windAvg;
         this.windGust=tempestObs.windGust;
-        this.windDir=tempestObs.windDir;
+        if (tempestObs.windAvg>0){
+            this.windDir=tempestObs.windDir;
+        }
+        
         this.solarRadiation=tempestObs.solarRadiation;
         this.precipType=tempestObs.precipType;
         this.windSampleInterval=tempestObs.windSampleInterval;
