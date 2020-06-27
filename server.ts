@@ -13,6 +13,7 @@ import { AirObservation } from "./AirObs";
 import { SkyObservation } from "./SkyObs";
 import { TempestObservation } from "./TempestObs";
 import { RapidWindEvent } from "./RapidWindEvent";
+import { MqttClient } from "mqtt";
 
 const pkg = require("./package.json");
 
@@ -50,6 +51,7 @@ class Server {
 
         winston.info("Initialising MQTT connection...");
         this.mqttClient = mqtt.connect(serverAddress);
+        
         this.mqttClient.on("connect", function () {
             winston.info("MQTT connection established with " + serverAddress);
             deferred.resolve();
@@ -113,7 +115,10 @@ class Server {
         }
     }
     observationUpdate(topic: string, value: number) {
-        this.mqttClient.publish(`wx/${topic}`, value.toString());
+        let opts:mqtt.IClientPublishOptions = {
+            retain:true
+        };
+        this.mqttClient.publish(`wx/${topic}`, value.toString(),opts);
     }
 }
 
