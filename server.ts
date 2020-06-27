@@ -14,6 +14,7 @@ import { SkyObservation } from "./SkyObs";
 import { TempestObservation } from "./TempestObs";
 import { RapidWindEvent } from "./RapidWindEvent";
 import { MqttClient } from "mqtt";
+import { LightningStrikeEvent } from "./LightningEvent";
 
 const pkg = require("./package.json");
 
@@ -87,8 +88,11 @@ class Server {
             switch (type) {
                 case EventType.device_status:
                 case EventType.evt_precip:
-                case EventType.evt_strike:
                 case EventType.hub_status:
+                    break;
+                case EventType.evt_strike:
+                    let levt:LightningStrikeEvent = new LightningStrikeEvent(wxobs);
+                    this.currentObs.UpdateFromLightningStrike(levt);
                     break;
                 case EventType.obs_air:
                     let airObs:AirObservation = new AirObservation(wxobs);

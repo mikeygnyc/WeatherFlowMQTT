@@ -5,10 +5,16 @@ import { AirObservation } from "./AirObs";
 import { SkyObservation } from "./SkyObs";
 import { TempestObservation } from "./TempestObs";
 import { RapidWindEvent } from "./RapidWindEvent";
+import { LightningStrikeEvent } from "./LightningEvent";
 
 export class CurrentObservation extends EventEmitter {
     constructor() {
         super();
+    }
+    public UpdateFromLightningStrike(strike:LightningStrikeEvent){
+        this.lastLightningStrikeDistance=strike.distance;
+        this.lastLightningStrikeEnergy=strike.energy;
+        this.LastUpdate=strike.timeEpoch;
     }
     public UpdateFromWind(rapidWind:RapidWindEvent){
         this.windSpeedInstant=rapidWind.windSpeed;
@@ -79,7 +85,6 @@ export class CurrentObservation extends EventEmitter {
             this._airTemperature = value;
             this.emit("update", "AirTemperature", value);
         }
-        this._airTemperature = value;
     }
     private _relativeHumidity!: number;
     public get relativeHumidity(): number {
@@ -90,7 +95,36 @@ export class CurrentObservation extends EventEmitter {
             this._relativeHumidity = value;
             this.emit("update", "RelativeHumidity", value);
         }
-        this._relativeHumidity = value;
+    }
+    private _lastLightningStrikeTime!: number;
+    public get lastLightningStrikeTime(): number {
+        return this._lastLightningStrikeTime;
+    }
+    public set lastLightningStrikeTime(value: number) {
+        if (this._lastLightningStrikeTime !== value) {
+            this._lastLightningStrikeTime = value;
+            this.emit("update", "LastLightningStrikeTime", value);
+        }
+    }
+    private _lastLightningStrikeDistance!: number;
+    public get lastLightningStrikeDistance(): number {
+        return this._lastLightningStrikeDistance;
+    }
+    public set lastLightningStrikeDistance(value: number) {
+        if (this._lastLightningStrikeDistance !== value) {
+            this._lastLightningStrikeDistance = value;
+            this.emit("update", "LastLightningStrikeDistance", value);
+        }
+    }
+    private _lastLightningStrikeEnergy!: number;
+    public get lastLightningStrikeEnergy(): number {
+        return this._lastLightningStrikeEnergy;
+    }
+    public set lastLightningStrikeEnergy(value: number) {
+        if (this._lastLightningStrikeEnergy !== value) {
+            this._lastLightningStrikeEnergy = value;
+            this.emit("update", "LastLightningStrikeEnergy", value);
+        }
     }
     private _lightningStrikeCount!: number;
     public get lightningStrikeCount(): number {
