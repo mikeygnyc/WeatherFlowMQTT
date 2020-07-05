@@ -21,10 +21,10 @@ export class HardwareStatus extends EventEmitter {
         }
     }
     HubParamUpdate(paramName:string,value:any){
-        this.emit("update", `/hub/${paramName}`, value);
+        this.emit("update", `hub/${paramName}`, value);
     }
     DeviceParamUpdate(devSn:string,paramName:string,value:any){
-        this.emit("update", `/devices/${devSn}/${paramName}`, value);
+        this.emit("update", `devices/${devSn}/${paramName}`, value);
     }
     Hub:HubStatus;
     Devices:Map<string,DeviceStatus>;
