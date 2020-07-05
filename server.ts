@@ -16,6 +16,8 @@ import { RapidWindEvent } from "./RapidWindEvent";
 import { MqttClient } from "mqtt";
 import { LightningStrikeEvent } from "./LightningEvent";
 import { HardwareStatus } from "./HardwareStatus";
+import { DeviceEvent } from "./DeviceEvent";
+import { HubEvent } from "./HubEvent";
 
 const pkg = require("./package.json");
 
@@ -90,8 +92,14 @@ class Server {
             let type:EventType=(<any>EventType)[wxobs.type];
             switch (type) {
                 case EventType.device_status:
-                case EventType.evt_precip:
+                    let devStat:DeviceEvent = new DeviceEvent(wxobs);
+                    this.hardwareStat.UpdateDeviceStatus(devStat);
+                    break;
                 case EventType.hub_status:
+                    let hubStat:HubEvent = new HubEvent(wxobs);
+                    this.hardwareStat.UpdateHubStatus(hubStat);
+                    break;
+                case EventType.evt_precip:
                     break;
                 case EventType.evt_strike:
                     let levt:LightningStrikeEvent = new LightningStrikeEvent(wxobs);
