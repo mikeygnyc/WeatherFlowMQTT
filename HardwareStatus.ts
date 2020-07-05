@@ -19,6 +19,7 @@ export class HardwareStatus extends EventEmitter {
             dev.on("update",this.DeviceParamUpdate.bind(this));
             this.Devices.set(dev.serial_number,dev);
         }
+        this.Devices.get(dev.serial_number)?.Update(dev);
     }
     HubParamUpdate(paramName:string,value:any){
         this.emit("update", `hub/${paramName}`, value);
