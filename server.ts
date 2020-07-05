@@ -15,6 +15,7 @@ import { TempestObservation } from "./TempestObs";
 import { RapidWindEvent } from "./RapidWindEvent";
 import { MqttClient } from "mqtt";
 import { LightningStrikeEvent } from "./LightningEvent";
+import { HardwareStatus } from "./HardwareStatus";
 
 const pkg = require("./package.json");
 
@@ -23,9 +24,10 @@ class Server {
         this.mqttServer = mqttUri;
         this.listenPort = udpPort;
         this.currentObs = new CurrentObservation();
-
+        this.hardwareStat= new HardwareStatus();
         this.init();
     }
+    hardwareStat:HardwareStatus;
     currentObs: CurrentObservation;
     mqttServer: string;
     listenPort: number;
@@ -37,7 +39,8 @@ class Server {
         q.all([thys.initialiseMQTTClient(this.mqttServer), thys.initialiseSocket(this.listenPort)])
             .then(function () {
                 // Bind message events
-                thys.currentObs.on("update", thys.observationUpdate.bind(thys));
+                thys.currentObs.on("update", thys.doMqttSend.bind(thys));
+                thys.hardwareStat.on("update",thys.doMqttSend.bind(thys));
                 thys.udp.on("message", thys.onIncomingMessage.bind(thys));
             })
             .then(function () {
@@ -118,7 +121,7 @@ class Server {
             winston.error(`udp msg error: ${e}`);
         }
     }
-    observationUpdate(topic: string, value: number) {
+    doMqttSend(topic: string, value: number) {
         let opts:mqtt.IClientPublishOptions = {
             retain:true
         };

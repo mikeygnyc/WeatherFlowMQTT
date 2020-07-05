@@ -18,6 +18,6 @@ export interface IEvent{
     reset_flags?:string;
     seq?:number;
     fs?:number[];
-    radioStats?:number[];
-    mqttStats?:number[];
+    radio_stats?:number[];
+    mqtt_stats?:number[];
 }
