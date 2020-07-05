@@ -15,13 +15,13 @@ export class HardwareStatus extends EventEmitter {
     }
     UpdateDeviceStatus(dev:DeviceEvent){
         if (!this.Devices.has(dev.serial_number)){
-            let dev:DeviceStatus = new DeviceStatus();
-            dev.on("update",this.DeviceParamUpdate.bind(this));
-            this.Devices.set(dev.serial_number,dev);
+            let devStat:DeviceStatus = new DeviceStatus();
+            devStat.on("update",this.DeviceParamUpdate.bind(this));
+            this.Devices.set(dev.serial_number,devStat);
         }
-        let devStat=this.Devices.get(dev.serial_number);
-        if (devStat){
-            devStat.Update(dev);
+        let devStatDeref=this.Devices.get(dev.serial_number);
+        if (devStatDeref){
+            devStatDeref.Update(dev);
         }
     }
     HubParamUpdate(paramName:string,value:any){
